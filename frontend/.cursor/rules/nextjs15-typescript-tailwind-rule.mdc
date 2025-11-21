@@ -1,0 +1,172 @@
+---
+description: Use when generate code frontEnd
+globs: 
+alwaysApply: false
+---
+This system prompt is designed for generating TypeScript code for the frontend of a real-time chat web application located in `D:\TongHop\ChatApp\frontend`, using Next.js 15, Tailwind CSS, and ShadCN UI. The AI should create code that adheres to the requirements in `D:\TongHop\ChatApp\ChatAppPRD.md` and tasks in `D:\TongHop\ChatApp\frontend\FrontendTodoList.md`, following Next.js 15 best practices and ensuring a neon-themed, responsive UI.
+
+## Key Requirements:
+
+1. **App Router**: Create all components within the `app` directory, adhering to Next.js 15 conventions.
+2. **Server Components**: Use Server Components by default; only use Client Components (`'use client'`) for interactivity (e.g., WebSocket, forms, notifications) or client-side state.
+3. **TypeScript**: Use modern TypeScript syntax with proper typing for components and functions.
+4. **Responsive Design**: Apply Tailwind CSS classes for responsive layouts, with a neon color scheme (e.g., pink, green, blue) and dark/light mode support.
+5. **Component Architecture**: Build modular, reusable components using ShadCN UI for pages (login, signup, profile, room creation/joining, chat, admin dashboard).
+6. **Data Fetching**: Use `fetch` API in Server Components with caching and revalidation strategies (e.g., `{ next: { revalidate: 3600 } }`).
+7. **SEO**: Implement Next.js 15 metadata API for all pages.
+8. **Image Optimization**: Use Next.js `Image` component for avatars and uploaded images.
+9. **Accessibility**: Ensure WCAG compliance with ARIA attributes and semantic HTML.
+10. **Error Handling**: Use `error.tsx` for error boundaries and `loading.tsx` for loading states.
+11. **API Routes**: Implement route handlers (`route.ts`) when needed.
+12. **Rendering**: Use Static Site Generation (SSG) or Server-Side Rendering (SSR) as appropriate.
+13. **WebSocket**: Integrate STOMP (`@stomp/stompjs`) for real-time chat and notifications.
+
+## Capabilities:
+
+1. Generate TypeScript code for Next.js 15 components with ShadCN UI and Tailwind CSS.
+2. Implement neon-styled UI (pink, green, blue) with dark/light mode support.
+3. Follow requirements in `ChatAppPRD.md` for features like chat, room management, and notifications.
+4. Break down complex layouts (e.g., chat interface, room lists) into reusable components.
+5. Implement efficient data fetching for room lists and message history.
+6. Optimize performance with code splitting, lazy loading, and parallel data fetching.
+7. Integrate SEO with metadata and real-time features via WebSocket.
+
+## Guidelines:
+
+1. Use TypeScript for type safety, with minimal explicit annotations (let TypeScript infer types where possible).
+2. Style exclusively with Tailwind CSS, using neon colors and dark/light mode (`dark:` prefix).
+3. Create functional components, using hooks (`useState`, `useEffect`) for Client Components.
+4. Add clear, concise comments for complex logic or design decisions.
+5. Follow Next.js 15 file structure: `/app` (pages), `/components` (UI components), `/public/avatars` (static assets), `/lib` (utilities), `/styles` (global CSS).
+6. Assume the project is initialized with Next.js 15, Tailwind CSS, ShadCN UI, and `@stomp/stompjs`.
+7. Use environment variables (`NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_WS_URL`) for backend/WebSocket endpoints.
+8. Optimize performance with code splitting, lazy loading, and Next.js caching.
+9. Ensure accessibility with semantic HTML and ARIA attributes.
+10. Avoid redundant type annotations; use `React.FC` or `React.ReactNode` only when necessary.
+
+## Code Generation Rules:
+
+1. Use `'use client'` only for Client Components requiring interactivity.
+2. Component syntax in `.tsx` files:
+   ```tsx
+   const ComponentName = () => {
+     // Component logic
+   };
+   ```
+3. For props:
+   ```tsx
+   interface ComponentNameProps {
+     // Props definition
+   }
+   const ComponentName = ({ prop1, prop2 }: ComponentNameProps) => {
+     // Component logic
+   };
+   ```
+4. Named exports for components:
+   ```tsx
+   export const ComponentName = () => {
+     // Component logic
+   };
+   ```
+5. Default exports for page components:
+   ```tsx
+   const Page = () => {
+     // Page component logic
+   };
+   export default Page;
+   ```
+6. Explicit typing (if needed):
+   ```tsx
+   import React from 'react';
+   const ComponentName: React.FC = () => {
+     // Component logic
+   };
+   // OR
+   const ComponentName = (): React.ReactNode => {
+     // Component logic
+   };
+   ```
+7. Data fetching in Server Components:
+   ```tsx
+   async function getData() {
+     const res = await fetch('http://localhost:8080/api/endpoint', { next: { revalidate: 3600 } });
+     if (!res.ok) throw new Error('Failed to fetch data');
+     return res.json();
+   }
+   export default async function Page() {
+     const data = await getData();
+     // Render component using data
+   }
+   ```
+8. Metadata for SEO:
+   ```tsx
+   import type { Metadata } from 'next';
+   export const metadata: Metadata = {
+     title: 'Page Title',
+     description: 'Page description',
+   };
+   ```
+9. Error handling (`error.tsx`):
+   ```tsx
+   'use client';
+   export default function Error({
+     error,
+     reset,
+   }: {
+     error: Error & { digest?: string };
+     reset: () => void;
+   }) {
+     return (
+       <div className="p-4 text-center">
+         <h2 className="text-xl font-bold">Something went wrong!</h2>
+         <p>{error.message}</p>
+         <button
+           className="mt-4 px-4 py-2 bg-neon-pink text-white rounded"
+           onClick={reset}
+         >
+           Try again
+         </button>
+       </div>
+     );
+   }
+   ```
+10. Loading states (`loading.tsx`):
+    ```tsx
+    export default function Loading() {
+      return (
+        <div className="p-4 text-center">Loading...</div>
+      );
+    }
+    ```
+11. WebSocket (STOMP) integration:
+    ```tsx
+    'use client';
+    import { Client } from '@stomp/stompjs';
+    const ChatComponent = () => {
+      const client = new Client({
+        brokerURL: process.env.NEXT_PUBLIC_WS_URL,
+        connectHeaders: { Authorization: `Bearer ${jwt}` },
+      });
+      // WebSocket logic
+    };
+    ```
+
+## ChatApp-Specific Requirements:
+
+1. Reference `D:\TongHop\ChatApp\ChatAppPRD.md` and `D:\TongHop\ChatApp\frontend\FrontendTodoList.md` for project requirements.
+2. Store 10 avatars (`avatar1.png` to `avatar10.jpg`) in `/public/avatars`.
+3. Implement chat UI in `/components/Chat.tsx`:
+   - Messages: Left-aligned (others), right-aligned (user), with timestamps and seen checkmarks.
+   - File upload: Restrict to .jpg/.png (5MB), .mp4 (50MB); display error for invalid files.
+   - Pagination: Load 30 messages initially, more on scroll up (call `/api/rooms/{roomId}/messages`).
+   - Owner controls: Buttons for deleting messages and kicking members.
+4. Implement neon-style notifications in `/components/Notification.tsx`:
+   - Popup (bottom-right, 1-2s) for new messages via `/topic/users/{userId}/notifications`.
+   - Match dark/light mode with neon colors (pink, green, blue).
+5. Implement room lists in `/app/rooms/page.tsx`:
+   - Paginated (10 rooms/page) with personal and public rooms.
+   - Show unread message count per room (updated via WebSocket).
+6. Use JWT for API calls (Axios, `/api/auth/*`, `/api/rooms/*`) and WebSocket authentication.
+7. Use ShadCN UI components (e.g., `Card`, `Button`, `Input`) for consistent, modern design.
+8. Handle password errors in `/app/rooms/join/page.tsx`:
+   - Red border, shake animation, and "Incorrect password" message on invalid input.

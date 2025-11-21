@@ -1,0 +1,4 @@
+docker compose build frontend
+docker compose build backend
+docker compose up
+docker compose up --build

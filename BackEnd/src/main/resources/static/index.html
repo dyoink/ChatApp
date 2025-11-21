@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp Backend</title>
+    <!-- Google Fonts for Neon Effect -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Orbitron', Arial, sans-serif;
+            background: #181A20;
+            color: #e0e0e0;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: rgba(24, 26, 32, 0.95);
+            padding: 40px 32px 32px 32px;
+            border-radius: 18px;
+            box-shadow: 0 0 32px 4px #00ffe7, 0 2px 24px 0 #000a;
+            max-width: 1000px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            color: #00ffe7;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px #00ffe7, 0 0 24px #00ffe7, 0 0 2px #fff;
+            margin-bottom: 18px;
+            animation: neon-flicker 2.5s infinite alternate;
+        }
+        @keyframes neon-flicker {
+            0%, 100% { text-shadow: 0 0 8px #00ffe7, 0 0 24px #00ffe7, 0 0 2px #fff; }
+            45% { text-shadow: 0 0 16px #00ffe7, 0 0 32px #00ffe7, 0 0 4px #fff; }
+            50% { text-shadow: 0 0 2px #00ffe7, 0 0 8px #00ffe7, 0 0 1px #fff; }
+            55% { text-shadow: 0 0 16px #00ffe7, 0 0 32px #00ffe7, 0 0 4px #fff; }
+        }
+        .status {
+            background: rgba(0,255,231,0.08);
+            color: #00ffe7;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 18px 0 24px 0;
+            text-align: center;
+            font-size: 1.1rem;
+            border: 1.5px solid #00ffe7;
+            box-shadow: 0 0 8px #00ffe744, 0 0 2px #00ffe7;
+        }
+        .endpoints {
+            background: rgba(40, 44, 52, 0.85);
+            padding: 24px 18px;
+            border-radius: 10px;
+            margin: 18px 0 0 0;
+            box-shadow: 0 0 12px #00ffe733;
+        }
+        .endpoints h3 {
+            color: #ff00ea;
+            text-shadow: 0 0 8px #ff00ea, 0 0 2px #fff;
+            margin-bottom: 16px;
+            font-size: 1.2rem;
+        }
+        .endpoint {
+            margin: 14px 0;
+            padding: 12px 14px;
+            background: rgba(24, 26, 32, 0.7);
+            border-left: 4px solid #00ffe7;
+            border-radius: 6px;
+            box-shadow: 0 0 8px #00ffe733;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .method {
+            font-weight: bold;
+            color: #ff00ea;
+            text-shadow: 0 0 4px #ff00ea, 0 0 1px #fff;
+            font-size: 1.05rem;
+        }
+        .url {
+            font-family: 'Fira Mono', monospace;
+            background: #23272f;
+            color: #00ffe7;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 1.01rem;
+            box-shadow: 0 0 4px #00ffe7aa;
+        }
+        .desc {
+            color: #e0e0e0;
+            font-size: 0.98rem;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 32px;
+            color: #bdbdbd;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+        .footer p {
+            margin: 8px 0;
+            color: #00ffe7;
+            text-shadow: 0 0 4px #00ffe7, 0 0 1px #fff;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 18px 4px; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 ChatApp Backend API</h1>
+        <div class="status">
+            ✅ Backend is running successfully on port 8080
+        </div>
+        <div class="endpoints">
+            <h3>📋 API Endpoints (Active)</h3>
+            <div style="margin-bottom: 24px;">
+                <div class="endpoint" style="border-left-color:#00ffe7;">
+                    <span class="method">POST</span>
+                    <span class="url">/api/auth/signup</span>
+                    <span class="desc">Đăng ký tài khoản</span>
+                </div>
+                <div class="endpoint" style="border-left-color:#00ffe7;">
+                    <span class="method">POST</span>
+                    <span class="url">/api/auth/login</span>
+                    <span class="desc">Đăng nhập</span>
+                </div>
+                <div class="group-title" style="color:#00ffe7;text-shadow:0 0 8px #00ffe7,0 0 2px #fff;margin:18px 0 8px 0;font-size:1.1rem;">🔑 Authentication</div>
+            </div>
+            <div style="margin-bottom: 24px;">
+                <div class="endpoint" style="border-left-color:#ff00ea;">
+                    <span class="method">GET/PUT</span>
+                    <span class="url">/api/users/profile</span>
+                    <span class="desc">Lấy/Cập nhật thông tin cá nhân (JWT)</span>
+                </div>
+                <div class="group-title" style="color:#ff00ea;text-shadow:0 0 8px #ff00ea,0 0 2px #fff;margin:18px 0 8px 0;font-size:1.1rem;">👤 User</div>
+            </div>
+            <div style="margin-bottom: 24px;">
+                <div class="endpoint" style="border-left-color:#00ff99;">
+                    <span class="method">POST</span>
+                    <span class="url">/api/rooms/create</span>
+                    <span class="desc">Tạo phòng chat</span>
+                </div>
+                <div class="endpoint" style="border-left-color:#00ff99;">
+                    <span class="method">POST</span>
+                    <span class="url">/api/rooms/join</span>
+                    <span class="desc">Tham gia phòng chat</span>
+                </div>
+                <div class="endpoint" style="border-left-color:#00ff99;">
+                    <span class="method">DELETE</span>
+                    <span class="url">/api/rooms/delete</span>
+                    <span class="desc">Xóa phòng chat</span>
+                </div>
+                <div class="endpoint" style="border-left-color:#00ff99;">
+                    <span class="method">GET</span>
+                    <span class="url">/api/rooms/search</span>
+                    <span class="desc">Tìm kiếm phòng (phân trang)</span>
+                </div>
+                <div class="endpoint" style="border-left-color:#00ff99;">
+                    <span class="method">GET</span>
+                    <span class="url">/api/rooms/{roomId}</span>
+                    <span class="desc">Chi tiết phòng</span>
+                </div>
+                <div class="endpoint" style="border-left-color:#00ff99;">
+                    <span class="method">GET</span>
+                    <span class="url">/api/rooms/user</span>
+                    <span class="desc">Phòng đã tham gia</span>
+                </div>
+                <div class="endpoint" style="border-left-color:#00ff99;">
+                    <span class="method">GET</span>
+                    <span class="url">/api/rooms/own</span>
+                    <span class="desc">Phòng bạn tạo</span>
+                </div>
+                <div class="group-title" style="color:#00ff99;text-shadow:0 0 8px #00ff99,0 0 2px #fff;margin:18px 0 8px 0;font-size:1.1rem;">💬 Room</div>
+            </div>
+            <div style="margin-bottom: 24px;">
+                <div class="endpoint" style="border-left-color:#ffb300;">
+                    <span class="method">GET</span>
+                    <span class="url">/api/rooms/{roomId}/messages</span>
+                    <span class="desc">Lịch sử tin nhắn (phân trang)</span>
+                </div>
+                <div class="endpoint" style="border-left-color:#ffb300;">
+                    <span class="method">DELETE</span>
+                    <span class="url">/api/rooms/{roomId}/messages/{messageId}/delete</span>
+                    <span class="desc">Xóa tin nhắn</span>
+                </div>
+                <div class="group-title" style="color:#ffb300;text-shadow:0 0 8px #ffb300,0 0 2px #fff;margin:18px 0 8px 0;font-size:1.1rem;">🗨️ Chat</div>
+            </div>
+            <div style="margin-bottom: 24px;">
+                <div class="endpoint" style="border-left-color:#00e1ff;">
+                    <span class="method">POST</span>
+                    <span class="url">/api/upload</span>
+                    <span class="desc">Upload ảnh (.jpg/.png ≤5MB) hoặc video (.mp4 ≤50MB)</span>
+                </div>
+                <div class="group-title" style="color:#00e1ff;text-shadow:0 0 8px #00e1ff,0 0 2px #fff;margin:18px 0 8px 0;font-size:1.1rem;">📁 File Upload</div>
+            </div>
+            <div style="margin-bottom: 0;">
+                <div class="endpoint" style="border-left-color:#ff00ea;">
+                    <span class="method">WebSocket</span>
+                    <span class="url">/chat</span>
+                    <span class="desc">Kết nối real-time (STOMP/WebSocket, JWT)</span>
+                </div>
+                <div class="endpoint" style="border-left-color:#ff00ea;">
+                    <span class="method">WebSocket</span>
+                    <span class="url">/app/rooms/{roomId}/send</span>
+                    <span class="desc">Gửi tin nhắn vào phòng</span>
+                </div>
+                <div class="endpoint" style="border-left-color:#ff00ea;">
+                    <span class="method">WebSocket</span>
+                    <span class="url">/app/rooms/{roomId}/messages/{messageId}/seen</span>
+                    <span class="desc">Đánh dấu đã xem tin nhắn</span>
+                </div>
+                <div class="group-title" style="color:#ff00ea;text-shadow:0 0 8px #ff00ea,0 0 2px #fff;margin:18px 0 8px 0;font-size:1.1rem;">🔌 WebSocket</div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>🔧 Built with Spring Boot 3 + Java 17</p>
+            <p>🔐 JWT Authentication enabled</p>
+            <p>🗄️ PostgreSQL Database connected</p>
+        </div>
+    </div>
+</body>
+</html>
