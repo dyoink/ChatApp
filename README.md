@@ -133,7 +133,7 @@ ChatApp is a modern real-time chat application built with Next.js 15 (frontend) 
 ---
 
 ## Developer Info
-- **Author**: Nguyễn Vũ Hiệp
+- **Author**: Trần Chí Đức
 - **Tech Stack**: Next.js 15, TypeScript, Tailwind CSS, shadcn/ui, Spring Boot, WebSocket, JWT
 
 ---
